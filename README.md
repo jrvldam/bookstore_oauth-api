@@ -37,3 +37,37 @@ services:
     depends_on:
       - cassandra-2
 ```
+
+Access to container `cql` session:
+```shell
+docker exec -it cassandra-1 cqlsh
+```
+
+Create new keyspace:
+```shell
+CREATE KEYSPACE oauth WITH REPLICATION = {'class':'SimpleStrategy','replication_factor':1};
+```
+
+Check the new keyspace:
+```shell
+describe keyspaces;
+```
+
+Use the new keyspace:
+```shell
+USE oauth;
+```
+
+Describe tables:
+```shell
+describe tables;
+```
+
+Create `access_tokens` table:
+```cql
+CREATE TABLE access_tokens(access_token VARCHAR PRIMARY KEY, user_id BIGINT, client_id BIGINT, expires BIGINT);
+```
+
+```cql
+SELECT * FROM access_tokens;
+```
