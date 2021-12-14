@@ -13,11 +13,7 @@ var (
 )
 
 func StartApplication() {
-	s, dbErr := cassandra.GetSession()
-	if dbErr != nil {
-		panic(dbErr)
-	}
-	s.Close()
+	cassandra.GetSession()
 
 	atService := access_token.NewService(db.NewRepository())
 	atHandler := http.NewHandler(atService)
